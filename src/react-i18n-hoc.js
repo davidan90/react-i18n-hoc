@@ -36,7 +36,7 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
             this.props.i18n = i18n[this.props.lang] || {};
         }
 
-        _componentDidMount() {
+        componentDidMount() {
             this.setState({isChangingLang: false});
         }
         
