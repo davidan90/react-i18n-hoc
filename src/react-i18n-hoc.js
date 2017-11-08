@@ -2,8 +2,10 @@ import { Component } from 'react';
 import { object, string } from 'prop-types';
 
 export const I18N = ({i18n, lang}) => (ComposeComponent) => {
-    class I18NWrapper extends Comment {
+    class I18NWrapper extends Component {
         static state = {
+            i18n,
+            lang,
             isChangingLang: false,
         };
 
@@ -14,7 +16,7 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
 
         static defaultProps = {
             i18n: {},
-            lang: undefined,
+            lang,
         }
 
         constructor(props) {
@@ -22,9 +24,12 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
         }
 
         componentWillMount() {
-            const language = lang || this._getBrowserLang();
-            this.props.lang = language;
-            this._selectI18N();
+            const lang = this.props.lang || this._getBrowserLang();
+            const i18n = this._selectI18N();
+            this.setState({
+                lang,
+                i18n,
+            });
         }
 
         _getBrowserLang() {
@@ -33,7 +38,7 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
         }
 
         _selectI18N() {
-            this.props.i18n = i18n[this.props.lang] || {};
+            return i18n[this.props.lang] || {};
         }
 
         componentDidMount() {

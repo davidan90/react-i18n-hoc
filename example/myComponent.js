@@ -23,7 +23,7 @@ export default class MyComponent extends Component {
         return (
             <div>
                 <h1>{this.props.i18n.title}</h1>
-                <p>>{this.props.i18n.text}</p>
+                <p>{this.props.i18n.text}</p>
             </div>
         );
     }
