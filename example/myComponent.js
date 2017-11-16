@@ -13,7 +13,7 @@ const i18n = {
     },
 }
 
-@I18N({i18n, lang})
+@I18N({i18n})
 export default class MyComponent extends Component {
     constructor(props) {
         super(props);

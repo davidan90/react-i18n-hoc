@@ -16,7 +16,7 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
 
         static defaultProps = {
             i18n: {},
-            lang,
+            lang: lang || window.navigator.language,
         }
 
         constructor(props) {
@@ -24,7 +24,7 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
         }
 
         componentWillMount() {
-            const lang = this.props.lang || this._getBrowserLang();
+            const {lang} = this.props;
             const i18n = this._selectI18N();
             this.setState({
                 lang,
@@ -32,12 +32,8 @@ export const I18N = ({i18n, lang}) => (ComposeComponent) => {
             });
         }
 
-        _getBrowserLang() {
-            this.setState({isChangingLang: true});
-            return window.navigator.language;
-        }
-
         _selectI18N() {
+            this.setState({isChangingLang: true});
             return i18n[this.props.lang] || {};
         }
 
